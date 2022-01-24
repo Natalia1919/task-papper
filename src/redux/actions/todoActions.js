@@ -10,3 +10,12 @@ export const removeTask = (item) => ({
   payload: item
 });
 
+export const toggleIsCompleted = () => ({
+  type: todoActionsTypes.TOGGLE_IS_COMPLETED
+});
+
+export const toggleIsSkipped = () => ({
+  type: todoActionsTypes.TOGGLE_IS_SKIPPED
+});
+
+

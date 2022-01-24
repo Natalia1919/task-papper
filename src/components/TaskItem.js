@@ -1,12 +1,14 @@
 import {ReactComponent as Checkbox} from '../assets/check-box.svg';
 import {ReactComponent as Trash} from '../assets/trash.svg';
-import { removeTask } from '../redux/actions/todoActions';
+import { removeTask, toggleIsCompleted, toggleIsSkipped } from '../redux/actions/todoActions';
 import {connect} from 'react-redux';
 
-const TaskItem = ({todoTask, removeTodo}) => {
+const TaskItem = ({todoTask, removeTodo, skipped, completed, handleIsCompleted, handleIsSkipped}) => {
   return (
   <li className='task__item'>
-  <button className='btn task__check skipped'>
+  <button className={ completed ? `btn task__check completed` : `btn task__check`}
+  onClick={handleIsCompleted}
+  >
   <Checkbox className='task__checkbox'/>
   </button>
   <span className="task__text">{todoTask.text}</span>
@@ -20,7 +22,14 @@ const TaskItem = ({todoTask, removeTodo}) => {
 };
 
 const mapDispatchToProps = dispatch => ({
-  removeTodo: item => dispatch(removeTask(item))
-})
+  removeTodo: item => dispatch(removeTask(item)),
+  handleIsCompleted: () => dispatch(toggleIsCompleted()),
+  handleIsSkipped: () => dispatch(toggleIsSkipped())
+});
 
-export default connect(null, mapDispatchToProps) (TaskItem);
+ const mapStateToProps = state => ({
+   completed: state.todos.isCompleted,
+   skipped: state.todos.isSkipped
+ })
+
+export default connect(mapStateToProps, mapDispatchToProps) (TaskItem);

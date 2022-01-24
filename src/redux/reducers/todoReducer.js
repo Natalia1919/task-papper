@@ -3,7 +3,9 @@ const initialState = {
   todoItems: [{
     text: 'first item',
     id: 111
-  }]
+  }],
+  isCompleted: false,
+  isSkipped: false,
 }
 
 const todoReducer = (state = initialState, action) => {
@@ -17,6 +19,18 @@ const todoReducer = (state = initialState, action) => {
       return {
         ...state,
         todoItems: [...state.todoItems.filter(todoItem => todoItem.id !== action.payload.id)]
+      }
+    }
+    case todoActionsTypes.TOGGLE_IS_COMPLETED: {
+      return {
+        ...state,
+        isCompleted: !state.isCompleted
+      }
+    }
+    case todoActionsTypes.TOGGLE_IS_SKIPPED: {
+      return {
+        ...state,
+        isSkipped: !state.isSkipped
       }
     }
     default:
