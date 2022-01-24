@@ -114,6 +114,11 @@ text-transform: uppercase;
     padding: 5px;
     margin-bottom: 20px;
   }
+  &__title{
+    text-transform: capitalize;
+    letter-spacing: 0.4px;
+    font-size: 20px;
+  }
   &__item {
     padding: 5px;
     display: flex;

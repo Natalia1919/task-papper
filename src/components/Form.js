@@ -1,5 +1,7 @@
 import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import {addTask} from '../redux/actions/todoActions';
+import {connect} from 'react-redux';
 
 class Form extends React.Component{
   constructor(props){
@@ -23,7 +25,7 @@ class Form extends React.Component{
     const newTask = this.state;
     console.log(newTask);
     if(newTask.text.trim().length > 3){
-      ///dispatch
+      this.props.addNewTask(newTask)
       this.setState({
         text: '',
         id: ''
@@ -50,4 +52,8 @@ class Form extends React.Component{
   }
 }
 
-export default Form;
+const mapDispatchToProps = dispatch => ({
+  addNewTask: item => dispatch(addTask(item))
+})
+
+export default connect(null, mapDispatchToProps)(Form);
