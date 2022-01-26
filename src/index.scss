@@ -98,17 +98,6 @@ text-transform: uppercase;
   }
 }
 
-
-.btn{
-  background-color: transparent;
-  border: none;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  padding: 5px;
-  
-}
 .task {
   &__list {
     padding: 5px;
@@ -127,37 +116,27 @@ text-transform: uppercase;
       margin-bottom: 10px;
     }
   }
+  &__check-button {
+   display: flex;
+   align-items: center;
+   margin-right: 15px;
+  }
 
   &__check {
     position: relative;
-    &::before,
-    &::after{
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      transition: all 0.3s ease;
-    }
+    width: 30px;
+    height: 30px;
+    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  &__check.completed{
-    &::before{
-      width: 18px;
-      height: 13px;
-      background-image: url('./assets/completed.svg');
-    }
-  }
-  &__check.skipped{
-    &::after{
-      width: 30px;
-      height: 30px;
-      background-image: url('./assets/skipped.svg');
-    }
-  }
-
+ 
   &__text{
-    padding: 0 5px;
-    margin: 0 10px;
+    margin-left: 15px;
+  }
+  &__trash{
+    cursor: pointer;
   }
 }
 
@@ -188,7 +167,7 @@ text-transform: uppercase;
     }
 
     &:focus {
-      outline-width: none;
+      outline-width: 0px;
     }
   }
 

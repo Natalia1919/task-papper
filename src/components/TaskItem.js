@@ -1,35 +1,27 @@
-import {ReactComponent as Checkbox} from '../assets/check-box.svg';
+import React from 'react'
 import {ReactComponent as Trash} from '../assets/trash.svg';
-import { removeTask, toggleIsCompleted, toggleIsSkipped } from '../redux/actions/todoActions';
-import {connect} from 'react-redux';
+import {ReactComponent as Completed} from '../assets/completed.svg';
 
-const TaskItem = ({todoTask, removeTodo, skipped, completed, handleIsCompleted, handleIsSkipped}) => {
-  return (
-  <li className='task__item'>
-  <button className={ completed ? `btn task__check completed` : `btn task__check`}
-  onClick={handleIsCompleted}
-  >
-  <Checkbox className='task__checkbox'/>
-  </button>
-  <span className="task__text">{todoTask.text}</span>
-  <button 
-  className="btn task__delete"
-  onClick={() => {removeTodo(todoTask)}}>
-  <Trash className='task__trash'/>
-  </button>
-  </li>
-  )
+class TaskItem extends React.Component{
+  render(){
+    return (
+      <li className='task__item'>
+        <div className="task__check-button" onClick={() => this.props.handleDone(this.props.todoTask.id)}>
+        <span className="task__check">
+        {
+          this.props.todoTask.isCompleted &&
+          <Completed />
+        }
+        </span>
+        <span className="task__text">{this.props.todoTask.text}</span>
+        </div>
+      <Trash className='task__trash'
+      onClick={() => {this.props.deleteTask(this.props.todoTask.id)}}/>
+      </li>
+      )
+  }
 };
 
-const mapDispatchToProps = dispatch => ({
-  removeTodo: item => dispatch(removeTask(item)),
-  handleIsCompleted: () => dispatch(toggleIsCompleted()),
-  handleIsSkipped: () => dispatch(toggleIsSkipped())
-});
+export default TaskItem;
 
- const mapStateToProps = state => ({
-   completed: state.todos.isCompleted,
-   skipped: state.todos.isSkipped
- })
 
-export default connect(mapStateToProps, mapDispatchToProps) (TaskItem);

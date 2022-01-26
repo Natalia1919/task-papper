@@ -1,27 +1,34 @@
+import React from 'react';
 import TaskItem from './TaskItem';
-import {connect} from 'react-redux';
 
-const TaskList = ({todoTasks}) => {
-  return (
-    <div className="container">
-      {
-        todoTasks.length 
-        ? (<ul className='task__list'>
+
+class TaskList extends React.Component{
+  render() {
+    const {handleDone,deleteTask} = this.props;
+    console.log(handleDone)
+    console.log(deleteTask)
+    return (
+      <div className="container">
         {
-          todoTasks.map(todoTask => (
-            <TaskItem key={todoTask.id} todoTask={todoTask} />
-          ))
+          this.props.todoTasks.length 
+          ? (<ul className='task__list'>
+          {
+            this.props.todoTasks.map(todoTask => (
+              <TaskItem key={todoTask.id} 
+              todoTask={todoTask} 
+              handleDone={handleDone}
+              deleteTask={deleteTask}/>
+            ))
+          }
+        </ul>)
+        : (<h2 className='task__title'>Add your first task</h2>)
         }
-      </ul>)
-      : (<h2 className='task__title'>Add your first task</h2>)
-      }
+    </div>
+    )
+  }
   
-  </div>
-  )
 };
 
-const mapStateToProps = (state) => ({
-  todoTasks: state.todos.todoItems
-})
 
-export default connect (mapStateToProps)(TaskList);
+
+export default TaskList;
