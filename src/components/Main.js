@@ -4,8 +4,7 @@ import TaskList from './TaskList';
 const Main = () => {
   return (
   <main className="main">
-  <Period />
-  <TaskList />
+ 
   </main>
   )
 };
