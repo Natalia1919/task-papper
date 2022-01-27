@@ -13,7 +13,7 @@ class TaskList extends React.Component{
           {
             this.props.todoTasks.map(todoTask => (
               <TaskItem key={todoTask.id} 
-              todoTask={todoTask} 
+              {...todoTask} 
               handleDone={handleDone}
               deleteTask={deleteTask}/>
             ))

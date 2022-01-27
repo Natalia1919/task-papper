@@ -2,6 +2,8 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import Period from './components/Period';
 import TaskList from './components/TaskList';
+import Form from './components/Form';
+
 
 
 class App extends React.Component {
@@ -86,20 +88,10 @@ class App extends React.Component {
     
     
       <footer className="footer">
-        <div className="container">
-        <form className='form'
-          onSubmit={this.handleSubmit}>
-            <input 
-            type="text" 
-            className="form__input"  
-            placeholder="Write your task here" 
-            value={this.state.currentItem.text} 
-            onChange={e => this.handleChange(e.target.value)}/>
-            <button className="form__btn" type="submit">
-              Add
-            </button>
-          </form>
-        </div>
+        <Form 
+        handleChange={this.handleChange}
+        text={this.state.currentItem.text}
+        handleSubmit={this.handleSubmit}/>
       </footer>
       </div>
     )
