@@ -1,5 +1,6 @@
 import React from 'react';
 import TaskItem from './TaskItem';
+import PropTypes from "prop-types";
 
 
 class TaskList extends React.Component{
@@ -24,9 +25,12 @@ class TaskList extends React.Component{
     </div>
     )
   }
-  
-};
+}
 
-
+TaskList.propTypes = {
+  handleDone: PropTypes.func.isRequired,
+  deleteTask: PropTypes.func.isRequired,
+  todoTasks: PropTypes.array
+}
 
 export default TaskList;

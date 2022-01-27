@@ -1,6 +1,7 @@
 import React from 'react'
 import {ReactComponent as Trash} from '../assets/trash.svg';
 import {ReactComponent as Completed} from '../assets/completed.svg';
+import PropTypes from "prop-types";
 
 class TaskItem extends React.Component{
   render(){
@@ -20,7 +21,15 @@ class TaskItem extends React.Component{
       </li>
       )
   }
-};
+}
+
+TaskItem.propTypes = {
+  handleDone: PropTypes.func.isRequired,
+  id: PropTypes.string,
+  isCompleted: PropTypes.bool,
+  text: PropTypes.string,
+  deleteTask: PropTypes.func.isRequired,
+}
 
 export default TaskItem;
 

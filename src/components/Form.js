@@ -1,10 +1,11 @@
-import React from 'react';
+import React from "react";
+import PropTypes from "prop-types";
 
 class Form extends React.Component {
   render(){
     return (
       <div className="container">
-        <form className='form'
+        <form className="form"
           onSubmit={this.props.handleSubmit}>
             <input 
             type="text" 
@@ -20,5 +21,12 @@ class Form extends React.Component {
     )
   }
 }
+
+Form.propTypes = {
+  handleSubmit: PropTypes.func.isRequired,
+  text: PropTypes.string,
+  handleChange: PropTypes.func.isRequired
+}
+
 
 export default Form;
