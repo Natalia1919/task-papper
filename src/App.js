@@ -7,14 +7,14 @@ import TaskList from './components/TaskList';
 class App extends React.Component {
   constructor(props){
     super(props);
-    this.state = {
-      taskItems: [],
-      currentItem:{
+      this.state = {
+        taskItems: [],
+        currentItem:{
         text: '',
         id: '',
         isCompleted: false
+        }
       }
-    }
   }
   handleChange = (value) => {
     this.setState({
@@ -29,7 +29,13 @@ class App extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault();
     const newTask = this.state.currentItem;
-    if(newTask.text.trim().length > 3){
+    if (newTask.text.trim().length < 3){
+      throw new Error("It's too small task")
+    }
+    else if(newTask.text.trim().length > 25){
+      throw new Error("It's too big task, try to be shorten")
+    }
+    else{
       this.setState({
         taskItems: [...this.state.taskItems, newTask],
         currentItem: {
@@ -58,7 +64,16 @@ class App extends React.Component {
         })]
       }
     })
-  }
+  } 
+  
+  componentDidUpdate (prevProps, prevState) {
+    if (this.state.taskItems.length > prevState.taskItems.length) {
+        const lastElement = this.state.taskItems;
+        console.log(`${lastElement[lastElement.length - 1].text} added`)
+        localStorage.setItem("task", JSON.stringify(this.state.taskItems))
+    }
+    }
+
   render(){
     return(
       <div className="wrapper">

@@ -5,8 +5,6 @@ import TaskItem from './TaskItem';
 class TaskList extends React.Component{
   render() {
     const {handleDone,deleteTask} = this.props;
-    console.log(handleDone)
-    console.log(deleteTask)
     return (
       <div className="container">
         {
