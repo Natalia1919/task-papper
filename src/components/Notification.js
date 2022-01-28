@@ -1,9 +1,11 @@
 import React, {useContext} from 'react';
+
 import MessageContext from '../context/message/MessageContext';
 
 
 function Notification() {
-  const {notification} = useContext(MessageContext)
+  const {notification} = useContext(MessageContext);
+
   return (
     notification !== null &&
     (<div className='notification container'>

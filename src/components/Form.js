@@ -1,16 +1,19 @@
 import React, {useState, useContext} from "react";
 import { v4 as uuidv4 } from 'uuid';
 
-import Input from '../elements/Input';
-import Button from '../elements/Button';
 import TasksContext from '../context/tasks/TasksContext';
 import MessageContext from '../context/message/MessageContext';
 
+import Input from '../elements/Input';
+import Button from '../elements/Button';
+
 function Form(){
   const [text, setText] = useState('');
-  const {addTask} = useContext(TasksContext);
+
+  const {taskItems, addTask} = useContext(TasksContext);
   const {setMessage} = useContext(MessageContext);
 
+  
   const handleChange = (e) => {
     setText(e.target.value)
   }
@@ -33,7 +36,8 @@ function Form(){
         id: uuidv4(),
         isDone: false
       }
-      addTask(newTask);
+      const items = [...taskItems, newTask]
+      addTask(items);
       setText('')
     }
   }

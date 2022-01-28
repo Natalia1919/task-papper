@@ -3,22 +3,17 @@ const tasksReducer = (state, action) => {
     case 'ADD_TASK':
       return {
         ...state,
-        taskItems: [...state.taskItems, action.payload]
+        taskItems: action.payload
       }
     case 'DELETE_TASK':
       return {
         ...state,
-        taskItems: state.taskItems.filter(taskItem => taskItem.id !== action.payload.id)
+        taskItems: action.payload
       }
     case 'IS_DONE':
       return {
         ...state,
-        taskItems: state.taskItems.map(taskItem => taskItem.id === action.payload.id ? {...taskItem, isDone: !taskItem.isDone} : taskItem)
-      }
-    case 'CLEAR_ALL':
-      return {
-        ...state,
-        taskItems: []
+        taskItems: action.payload
       }
       default: 
       return state

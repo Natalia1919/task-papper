@@ -1,11 +1,15 @@
 import React, {useContext} from 'react';
+
+import TasksContext from '../context/tasks/TasksContext';
+
 import TasksDone from '../elements/TasksDone';
 import TasksUndone from '../elements/TasksUndone';
-import TasksContext from '../context/tasks/TasksContext';
+
 
 
 function Header() {
-  const {taskItems} = useContext(TasksContext)
+  const {taskItems} = useContext(TasksContext);
+  
   return (
   <header className="header">
   <div className="container">

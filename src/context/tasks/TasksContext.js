@@ -1,6 +1,6 @@
 import React, {createContext, useReducer} from 'react';
-import tasksReducer from './TasksReducer';
 
+import tasksReducer from './TasksReducer';
 
 
 const TasksContext = createContext();
@@ -12,24 +12,20 @@ export const TasksProvider = ({children}) => {
 
   const [state, dispatch] = useReducer(tasksReducer, initialState);
 
-  const addTask = (item) => dispatch({
+  const addTask = (items) => dispatch({
     type: 'ADD_TASK',
-    payload: item
+    payload: items
   });
 
-  const deleteTask = (item) => dispatch({
+  const deleteTask = (items) => dispatch({
     type: 'DELETE_TASK',
-    payload: item
+    payload: items
   });
 
-  const toggleIsDone = (item) => dispatch({
+  const toggleIsDone = (items) => dispatch({
     type: 'IS_DONE',
-    payload: item,
-  })
-
-  const clearAll = () => dispatch({
-    type: 'CLEAR_ALL'
-  })
+    payload: items,
+  });
 
 
   return <TasksContext.Provider 
@@ -37,8 +33,7 @@ export const TasksProvider = ({children}) => {
     taskItems: state.taskItems,
     addTask,
     deleteTask,
-    toggleIsDone,
-    clearAll,
+    toggleIsDone
   }}>
     {children}
     </TasksContext.Provider>
