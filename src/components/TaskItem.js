@@ -1,35 +1,36 @@
-import React from 'react'
+import React, {useContext} from 'react';
+import PropTypes from 'prop-types'
+
+
 import {ReactComponent as Trash} from '../assets/trash.svg';
 import {ReactComponent as Completed} from '../assets/completed.svg';
-import PropTypes from "prop-types";
 
-class TaskItem extends React.Component{
-  render(){
+import TasksContext from '../context/tasks/TasksContext';
+
+
+function TaskItem({task}){
+  const {deleteTask, toggleIsDone} = useContext(TasksContext);
     return (
       <li className='task__item'>
-        <div className="task__check-button" onClick={() => this.props.handleDone(this.props.id)}>
+        <div className="task__check-button" onClick={() => {toggleIsDone(task)}}>
         <span className="task__check">
         {
-          this.props.isCompleted &&
+          task.isDone &&
           <Completed />
         }
         </span>
-        <span className="task__text">{this.props.text}</span>
+        <span className="task__text">{task.text}</span>
         </div>
       <Trash className='task__trash'
-      onClick={() => {this.props.deleteTask(this.props.id)}}/>
+      onClick={() => {deleteTask(task)}}/>
       </li>
-      )
-  }
+    )
 }
 
 TaskItem.propTypes = {
-  handleDone: PropTypes.func.isRequired,
-  id: PropTypes.string,
-  isCompleted: PropTypes.bool,
-  text: PropTypes.string,
-  deleteTask: PropTypes.func.isRequired,
+  task: PropTypes.object
 }
+
 
 export default TaskItem;
 
