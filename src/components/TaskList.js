@@ -1,11 +1,12 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import TasksContext from '../context/tasks/TasksContext'
+
 import TaskItem from './TaskItem';
 
 
 function TaskList() {
-  const {taskItems} = useContext(TasksContext);
+  const taskItems = useSelector(state => state.tasks.taskItems);
 
     return (
       <div className="container">

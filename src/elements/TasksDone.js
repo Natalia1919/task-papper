@@ -1,9 +1,11 @@
-import React,{useContext} from 'react';
+import React from 'react';
+import {useSelector} from 'react-redux';
 
-import TasksContext from '../context/tasks/TasksContext';
+
+
 
 function TasksDone() {
-  const {taskItems} = useContext(TasksContext);
+  const taskItems = useSelector(state => state.tasks.taskItems);
 
   const amoutOfDoneTasks =  taskItems.filter(tasksItem => tasksItem.isDone === true).length;
 

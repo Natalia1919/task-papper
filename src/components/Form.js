@@ -1,18 +1,17 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
+import {useDispatch, useSelector} from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import TasksContext from '../context/tasks/TasksContext';
-import MessageContext from '../context/message/MessageContext';
+import {addTask} from '../redux/tasks/tasksActions';
 
 import Input from '../elements/Input';
 import Button from '../elements/Button';
 
 function Form(){
   const [text, setText] = useState('');
-
-  const {taskItems, addTask} = useContext(TasksContext);
-  const {setMessage} = useContext(MessageContext);
-
+  
+  const dispatch = useDispatch();
+  const taskItems = useSelector(state => state.tasks.taskItems);
   
   const handleChange = (e) => {
     setText(e.target.value)
@@ -20,18 +19,18 @@ function Form(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(text.trim().length < 4 || text.trim().length > 25){
-      setMessage('The task is not correct');
-    }
-    else {
+    //if(text.trim().length < 4 || text.trim().length > 25){
+    //  setMessage('The task is not correct');
+    //}
+    if (text.trim().length > 4){
       const newTask = {
         text,
         id: uuidv4(),
         isDone: false
       }
       const items = [...taskItems, newTask]
-      addTask(items);
-      setText('')
+      dispatch(addTask(items));
+      setText('');
     }
   }
 

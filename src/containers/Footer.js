@@ -1,12 +1,12 @@
 import React from 'react';
 
 import Form from '../components/Form'
-import Notification from '../components/Notification';
+//import Notification from '../components/Notification';
 
 function Footer() {
   return (
     <footer className="footer">
-        <Notification />
+        {/*<Notification />*/}
         <Form />
     </footer>
   )

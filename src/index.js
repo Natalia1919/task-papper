@@ -1,9 +1,13 @@
 import React from "react";
 import ReactDOM from 'react-dom';
+import {Provider} from 'react-redux';
+
+
 import './index.scss';
+import store from './redux/store'
+
 import App from './App';
-import {TasksProvider} from './context/tasks/TasksContext';
-import {MessageProvider} from './context/message/MessageContext';
+
 
 
 
@@ -12,11 +16,9 @@ import {MessageProvider} from './context/message/MessageContext';
 
 ReactDOM.render(
   <React.StrictMode>
-    <TasksProvider>
-    <MessageProvider>
+    <Provider store={store}>
     <App />
-    </MessageProvider>
-    </TasksProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );
