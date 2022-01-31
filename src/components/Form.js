@@ -20,15 +20,8 @@ function Form(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if(text === ''){
-      setMessage('The task can be empty')
-    }
-    else if(text.trim().length < 4){
-      setMessage('The task is too small');
-    }
-    else if(text.trim().length > 25){
-      setMessage('The task is too big');
-      setText('');
+    if(text.trim().length < 4 || text.trim().length > 25){
+      setMessage('The task is not correct');
     }
     else {
       const newTask = {

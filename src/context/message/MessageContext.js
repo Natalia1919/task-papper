@@ -1,4 +1,4 @@
-import React, {createContext, useReducer} from 'react';
+import React, {createContext, useReducer, useEffect} from 'react';
 
 import messageReducer from './MessageReducer';
 
@@ -15,8 +15,10 @@ export const MessageProvider =({children}) => {
     payload: {message}
   })
 
-  setTimeout(() => dispatch({type: 'DELETE_MESSAGE'}), 3500)
-
+  
+    useEffect(() => {
+      setTimeout(() => dispatch({type: 'DELETE_MESSAGE'}), 3500)
+    },[state])   ///read if it can use useEffect inside context
 
   return <MessageContext.Provider
   value={{
