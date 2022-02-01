@@ -1,7 +1,8 @@
 import * as type from './tasksTypes'
 
 const initialState = {
-  taskItems: []
+  taskItems: [],
+  message: null
 }
 
 const tasks = (state = initialState, action) => {
@@ -20,6 +21,16 @@ const tasks = (state = initialState, action) => {
     return {
       ...state,
       taskItems: action.payload
+    }
+    case type.SET_MESSAGE: 
+    return {
+      ...state,
+      message: action.payload
+    }
+    case type.DELETE_MESSAGE: 
+    return {
+      ...state,
+      message: action.message
     }
     default: 
     return state

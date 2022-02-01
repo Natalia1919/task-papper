@@ -1,15 +1,15 @@
-import React, {useContext} from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
 
-import MessageContext from '../context/message/MessageContext';
 
 
 function Notification() {
-  const {notification} = useContext(MessageContext);
+  const notification = useSelector(state => state.tasks.message)
 
   return (
     notification !== null &&
     (<div className='notification container'>
-    <p className='notification__text'> * {notification.message}</p>
+    <p className='notification__text'> * {notification}</p>
   </div>)
   )
   }

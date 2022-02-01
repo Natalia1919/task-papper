@@ -4,6 +4,7 @@ import storage from 'redux-persist/lib/storage';
 import createSagaMiddleware from 'redux-saga';
 
 import rootReducer from './rootReducer';
+import rootSaga from './rootSaga';
 
 //localStorage
 const persistConfig = {
@@ -23,7 +24,7 @@ export const store = compose(
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 )(createStore)(persistedReducer);
 
-//sagaMiddleware.run(rootSaga)
+sagaMiddleware.run(rootSaga)
 
 export const persistor = persistStore(store);
 

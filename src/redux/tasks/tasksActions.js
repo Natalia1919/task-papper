@@ -16,3 +16,8 @@
     type: type.IS_DONE,
     payload: item
   });
+
+  export const setMsg = (message) => ({
+    type: type.SET_MESSAGE,
+    payload: message
+  });

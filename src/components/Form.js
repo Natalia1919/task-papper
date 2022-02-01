@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
-import {addTask} from '../redux/tasks/tasksActions';
+import {addTask, setMsg} from '../redux/tasks/tasksActions';
 
 import Input from '../elements/Input';
 import Button from '../elements/Button';
@@ -19,10 +19,11 @@ function Form(){
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    //if(text.trim().length < 4 || text.trim().length > 25){
-    //  setMessage('The task is not correct');
-    //}
-    if (text.trim().length > 4){
+    if(text.trim().length < 4 || text.trim().length > 25){
+      dispatch(setMsg('The task is not correct'));
+      setText('');
+    }
+    else{
       const newTask = {
         text,
         id: uuidv4(),
