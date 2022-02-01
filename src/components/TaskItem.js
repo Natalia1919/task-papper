@@ -1,35 +1,45 @@
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import {useDispatch, useSelector} from 'react-redux';
+
+import { deleteTask, toggleIsDone } from '../redux/tasks/tasksActions';
+
 import {ReactComponent as Trash} from '../assets/trash.svg';
 import {ReactComponent as Completed} from '../assets/completed.svg';
-import PropTypes from "prop-types";
 
-class TaskItem extends React.Component{
-  render(){
+
+
+
+
+function TaskItem({task}){
+  const dispatch = useDispatch();
+  const taskItems = useSelector(state => state.tasks.taskItems)
+
+  const isCompleted = taskItems.map((taskItem) => taskItem.id === task.id ? {...taskItem, isDone: !taskItem.isDone} : taskItem);
+  const deletedTask = taskItems.filter((taskItem) => taskItem.id !== task.id);
+
     return (
       <li className='task__item'>
-        <div className="task__check-button" onClick={() => this.props.handleDone(this.props.id)}>
+        <div className="task__check-button" onClick={() => {dispatch(toggleIsDone(isCompleted))}}>
         <span className="task__check">
         {
-          this.props.isCompleted &&
+          task.isDone &&
           <Completed />
         }
         </span>
-        <span className="task__text">{this.props.text}</span>
+        <span className="task__text">{task.text}</span>
         </div>
-      <Trash className='task__trash'
-      onClick={() => {this.props.deleteTask(this.props.id)}}/>
+      <Trash 
+      className='task__trash'
+      onClick={() => {dispatch(deleteTask(deletedTask))}}/>
       </li>
-      )
-  }
+    )
 }
 
 TaskItem.propTypes = {
-  handleDone: PropTypes.func.isRequired,
-  id: PropTypes.string,
-  isCompleted: PropTypes.bool,
-  text: PropTypes.string,
-  deleteTask: PropTypes.func.isRequired,
+  task: PropTypes.object
 }
+
 
 export default TaskItem;
 

@@ -1,22 +1,23 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
+
 import TaskItem from './TaskItem';
-import PropTypes from "prop-types";
 
 
-class TaskList extends React.Component{
-  render() {
-    const {handleDone,deleteTask} = this.props;
+function TaskList() {
+  const taskItems = useSelector(state => state.tasks.taskItems);
+
     return (
       <div className="container">
         {
-          this.props.todoTasks.length 
-          ? (<ul className='task__list'>
+          taskItems.length > 0
+        ? (<ul className='task__list'>
           {
-            this.props.todoTasks.map(todoTask => (
-              <TaskItem key={todoTask.id} 
-              {...todoTask} 
-              handleDone={handleDone}
-              deleteTask={deleteTask}/>
+            taskItems.map(task => (
+              <TaskItem key={task.id} 
+              task={task} 
+              />
             ))
           }
         </ul>)
@@ -24,13 +25,8 @@ class TaskList extends React.Component{
         }
     </div>
     )
-  }
+  
 }
 
-TaskList.propTypes = {
-  handleDone: PropTypes.func.isRequired,
-  deleteTask: PropTypes.func.isRequired,
-  todoTasks: PropTypes.array
-}
 
 export default TaskList;
